@@ -20,7 +20,7 @@ const Product = () => {
   const [media, setMedia] = useState(null);
   const [resImage, setResImage] = useState([]);
 
-  const [showmainImages, setShowmainImages] = useState([]);
+  const [showmainImages, setShowmainImages] = useState('');
   console.log("showmainImages--->", showmainImages);
   const [showcolorImages, setShowcolorImages] = useState([]);
 
@@ -79,8 +79,10 @@ const Product = () => {
   // ---tags----
 
   const tagsArray1 = [
-
+"electronics",
     "Clocks",
+    "Bags",
+    "Cosmetics" ,
     "Minimalism",
     " Lighting",
     "Accessories",
@@ -139,6 +141,10 @@ const Product = () => {
     console.log("fileUploaded", fileUploaded);
     setFiles(fileUploaded);
     console.log("files-main-images", files);
+
+
+    
+
   };
 
   // handle colorsimages files change
@@ -209,6 +215,8 @@ const Product = () => {
       );
 
     
+      setShowcolorImages(listimages)
+
 
       //--------------------------------------------------
 
@@ -237,7 +245,7 @@ const Product = () => {
     <div className="container pb-[50px] mb-55px text-center">
       <div>
         <h1 className="text-xl w-[300px] mx-auto bg-blue-300 p-[6px] rounded-lg">
-          Product Create   {showmainImages.length}
+          Product Create   {showcolorImages.length}
         </h1>
       </div>
 
@@ -395,15 +403,15 @@ const Product = () => {
 
 <div>
 
-<div>
+<div className=" grid grid-cols-12 mb-[22px]">
 
 
-{ showmainImages && showcolorImages.length > 0 &&  showmainImages.map((image, index) => (
+{ showcolorImages&& showcolorImages.length > 0 &&  showcolorImages.map((image, index) => (
   
 
-<div>
+<div className=" col-span-5 h-[300px]">
 
-<img src={image} alt="" />
+<img className="w-[100% ] object-cover object-center  h-[100%]" src={image.secure_url} alt="" />
 
 </div>
 
