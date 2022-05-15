@@ -9,6 +9,7 @@ import {useState, useEffect} from 'react';
 import axios from 'axios';
 import {useDispatch, useSelector} from 'react-redux';
 import { fetch_categories } from './redux/category';
+import { fetch_products } from './redux/product';
 import Home from './pages/home/index';
 import Category from './pages/category/index';
 import Product from './pages/product';
@@ -29,9 +30,37 @@ function App() {
 
     }
 
+// fetch allproducts from database and set in redux product
+
+    const fetchProducts = async () => {
+      const res = await axios.get('http://localhost:5000/api/product/all-products');
+dispatch(fetch_products(res.data));
+
+    }
+
     fetchCategories();
+    fetchProducts();
 
   }, [dispatch]);
+
+
+
+  useEffect(() => {
+  
+
+// fetch allproducts from database and set in redux product
+
+    const fetchProducts = async () => {
+      const res = await axios.get('http://localhost:5000/api/product/all-products');
+
+
+    }
+
+    
+    fetchProducts();
+
+  }, [dispatch]);
+
 
 
 
