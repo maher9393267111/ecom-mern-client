@@ -328,9 +328,11 @@ catch (error) {
 
 
 {/* --upload images-- */}
+<div className="p-[44px] ">
+
 
 <>
-      <Button danger onClick={handleClickUplaodicon}>
+      <Button className="w-[189px] p-[12px]" danger onClick={handleClickUplaodicon}>
         Upload Main Images
       </Button>
       <input type="file"
@@ -340,11 +342,11 @@ catch (error) {
              style={{display:'none'}} 
       /> 
     </>
-
+    </div>
 
 
     <>
-      <Button danger onClick={handleClickUplaodiconcolors}>
+      <Button className="w-[189px] mb-[44px]"  danger onClick={handleClickUplaodiconcolors}>
         Upload Colors Images
       </Button>
       <input type="file"
@@ -363,7 +365,7 @@ catch (error) {
 <div>
 
 
-<Button
+<Button  className="w-[190px] bg-green-200"
 onClick={ handleclick}
 >CreateProduct</Button>
 

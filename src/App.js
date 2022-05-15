@@ -5,13 +5,38 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
-
+import {useState, useEffect} from 'react';
+import axios from 'axios';
+import {useDispatch, useSelector} from 'react-redux';
+import { fetch_categories } from './redux/category';
 import Home from './pages/home/index';
 import Category from './pages/category/index';
 import Product from './pages/product';
 
 
 function App() {
+
+// fetch all categories from database and set in redux category
+
+
+  const dispatch = useDispatch();
+
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      const res = await axios.get('http://localhost:5000/api/category/get-all-category');
+      dispatch(fetch_categories(res.data));
+
+    }
+
+    fetchCategories();
+
+  }, [dispatch]);
+
+
+
+
+
   return (
     <div className="App">
       {/*  sabit  */}
