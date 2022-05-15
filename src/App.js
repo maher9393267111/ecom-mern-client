@@ -8,13 +8,14 @@ import {
 
 import Home from './pages/home/index';
 import Category from './pages/category/index';
+import Product from './pages/product';
 
 
 function App() {
   return (
     <div className="App">
       {/*  sabit  */}
-   <h1 className='  bg-green-300'>Ecomemrce template</h1>   
+   <h1 className='  bg-green-300 text-2xl p-[8px] text-center'>Ecomemrce template</h1>   
 
    <BrowserRouter>
     <Routes>
@@ -23,6 +24,8 @@ function App() {
         <Route index element={<Home />} />
       
         <Route path ='category' element = {<Category />} />
+
+<Route path ='product' element = {<Product />} />
 
         {/* </Route> */}
        

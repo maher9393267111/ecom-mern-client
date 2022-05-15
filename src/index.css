@@ -16,3 +16,24 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+@layer components {
+
+
+.p1{
+
+@apply pb-[12px] pt-[12px]
+
+}
+
+
+.p2{
+@apply Pr-[12px] pl-[12px]
+
+
+}
+
+
+
+}
