@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import {useSelector} from 'react-redux';
 import { useState, useEffect, useRef } from "react";
 import { Select, Input,Button } from "antd";
 const { Option } = Select;
@@ -8,6 +9,8 @@ const Product = () => {
 
   const apiURL = "http://localhost:5000/api/product/add-product";
 
+// fetch from redux category
+  const {allcategories} = useSelector(state => state.category);
 
   const hiddenFileInput = useRef(null);
 const hiddencolorFileInput = useRef(null);
@@ -203,7 +206,7 @@ const colorslist = await Promise.all(
     price,
     name,
      colorimages:colorslist,
-    category:'6281155aa43615d16337dc25',
+    category:category,
      oldprice,
      tags:tags[0],
     colors: colors[0],
@@ -234,7 +237,7 @@ catch (error) {
     <div className="container pb-[50px] mb-55px text-center">
       <div>
         <h1 className="text-xl w-[300px] mx-auto bg-blue-300 p-[6px] rounded-lg">
-          Product Create
+          Product Create  {category}
         </h1>
       </div>
 
@@ -253,6 +256,65 @@ catch (error) {
             </div>
 
             {/* ----------------- */}
+
+
+{/* -=categories-- */}
+
+
+
+<div>
+
+<div>
+
+
+{/* make caetegories in select inputs  */}
+{category}
+<select
+onChange={(e) => setCategory(e.target.value)}
+value={category.name}
+
+
+>
+
+
+{   allcategories.map((category) => (
+  
+ 
+  
+    <option value={category._id}>{category.name}</option>
+  
+
+    
+  
+  
+  ))}
+  
+
+
+
+
+</select>
+
+
+
+
+
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
 
             {/* ----price---- */}
 
