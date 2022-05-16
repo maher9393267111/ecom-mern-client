@@ -1,4 +1,5 @@
 import React from 'react';
+import { Slider } from 'antd';
 import { useState, useEffect } from 'react';
 import {useDispatch, useSelector} from 'react-redux'
 import {filter_products,filter_by_price} from '../../redux/product'
@@ -113,6 +114,30 @@ else if (colors.length === 0 && tags.length === 0 && category) {
 }
 
 
+function onChange(value) {
+    console.log('onChange: ', value);
+  }
+  
+  function onAfterChange(value) {
+    console.log('onAfterChange: ', value);
+
+    setPrice({ ...price, max: value[1], min: value[0] });
+    console.log("price---->", price);
+
+    setTimeout(() => {
+        dispatch(filter_by_price({price}));
+    }, 2000);
+  
+
+
+
+
+    
+ 
+  }
+  
+
+
 
 
     return (
@@ -166,6 +191,29 @@ onClick={filterPro}
 
 
   </div>
+
+
+<div>
+
+<>
+    
+    <Slider
+    className='slider  text-center w-[400px]'
+      range
+      marks={true}
+        min={0}
+        max={300}
+      step={10}
+      defaultValue={[10, 288]}
+      onChange={onChange}
+      onAfterChange={onAfterChange}
+    />
+  </>
+
+
+
+</div>
+
 
 
 
