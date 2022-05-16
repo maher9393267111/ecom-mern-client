@@ -2,13 +2,18 @@ import React from 'react';
 import { Slider } from 'antd';
 import { useState, useEffect } from 'react';
 import {useDispatch, useSelector} from 'react-redux'
-import {filter_products,filter_by_price} from '../../redux/product'
+import {filter_products,filter_by_price,products_totalprice} from '../../redux/product'
+var _ = require("underscore");
 
 const Home = () => {
 
 const [colors, setColorss] = useState(['black','blue','grey']);
 const [tags, setTags] = useState([]);
 const [category, setCategory] = useState('628115bca43615d16337dc29');
+
+
+
+
 
 // range price
 
@@ -114,6 +119,17 @@ else if (colors.length === 0 && tags.length === 0 && category) {
 }
 
 
+// -total price
+
+
+const total = () => {
+
+    dispatch(products_totalprice());
+
+}
+
+
+
 function onChange(value) {
     console.log('onChange: ', value);
   }
@@ -210,6 +226,17 @@ onClick={filterPro}
     />
   </>
 
+
+{/* -total price- */}
+
+<div>
+
+<h1 className=''
+onClick={total}
+
+>  Total prices</h1>
+
+</div>
 
 
 </div>

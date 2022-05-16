@@ -65,6 +65,14 @@ export const productSlice = createSlice({
           });
 
         console.log("filterPro---->", filterPro);
+
+
+const newState = {
+    ..._state,
+    filteredproducts: filterPro,
+    };
+
+
       }
 
   else    if (colors && !tags && !category) {
@@ -160,6 +168,30 @@ console.log("colors and category condition---->", colors, category);
 
     },
 
+products_totalprice: (state, action) => {
+
+    const _state = current(state);
+
+    // return prices from all products
+
+    const totalPrice = _state.allproducts.map((product) => {
+        return product.price;
+        }
+    )
+    console.log("totalPrice---->", totalPrice);
+    var sum = _.reduce(totalPrice, function(memo, num){ return memo + num; }, 0);
+
+    console.log("sum---->", sum);
+
+
+
+
+
+
+},
+
+
+
 
 filter_by_price: (state, action) => {
 
@@ -190,6 +222,10 @@ filter_by_price: (state, action) => {
 });
 
 // Action creators are generated for each case reducer function
-export const { fetch_products, filter_products,filter_by_price } = productSlice.actions;
+export const { fetch_products, filter_products,filter_by_price,
+
+    products_totalprice,
+
+} = productSlice.actions;
 
 export default productSlice.reducer;
