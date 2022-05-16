@@ -1,218 +1,102 @@
 import { createSlice, current } from "@reduxjs/toolkit";
 
 export const productSlice = createSlice({
-  name: "product",
-  initialState: {
-    allproducts: [],
-    filteredproducts: [],
-    toggle: false,
-    Show: false,
-  },
-
-  reducers: {
-    fetch_products: (state, action) => {
-      state.allproducts = action.payload;
+    name: "product",
+    initialState: {
+        allproducts: [],
+        filteredproducts: [],
+        toggle: false,
+        Show: false,
+        obje:{},
+        dots:''
     },
 
-    filter_products: (state, action) => {
-      state.filteredproducts = action.payload;
+    reducers: {
+        fetch_products: (state, action) => {
+            state.allproducts = action.payload;
+        },
 
-      const filteredproducts = state.allproducts.filter((product) => {
-        return product.category === action.payload;
-      });
+        filter_products: (state, action) => {
+            const { colors, tags,price,category,name,discount } = action.payload;
+            console.log('action payload ---->',action.payload);
 
-      state.filteredproducts = filteredproducts;
-    },
+// check action.payload key and value
 
-    // filter products by  array of fields price and category and colors array if exist
+if (colors)
 
-    filter_multiple_products: (state, action) => {
-      const { price, category, colors,tags } = action.payload;
-      console.log("actionPayload--->", action.payload);
+{console.log('colors condition ---->',colors);
 
-      if (price && category && colors && tags) {
-        console.log("price and category and colors");
-        const filteredproducts = state.allproducts.filter((product) => {
-          return (
-            product.category === category &&
-            product.price >= price &&
-            product.colors.includes(colors)
-            && product.tags.includes(tags)
-          );
-        });
+const filter = state.allproducts.filter((product) => {
+    return product.colors.includes(colors);
+});
 
-        state.filteredproducts = filteredproducts;
-      }
 
-      if (price && category) {
-        console.log("price and category");
-        const filteredproducts = state.allproducts.filter((product) => {
-          return product.category === category && product.price >= price;
-        });
+const _state = current(state)
 
-        state.filteredproducts = filteredproducts;
-      }
+const newState = {
+    ..._state,
+    filteredproducts: filter,
+};
 
-      if (price && colors) {
-        console.log("price and colors");
-        const filteredproducts = state.allproducts.filter((product) => {
-          return product.price >= price && product.colors.includes(colors);
-        });
+console.log("newState--->", newState);
 
-        state.filteredproducts = filteredproducts;
-      }
+return newState;
 
-      if (category && colors) {
-        console.log("category and colors");
-
-        const filteredproducts = state.allproducts.filter((product) => {
-          return (
-            product.category === category && product.colors.includes(colors)
-          );
-        });
-
-        state.filteredproducts = filteredproducts;
-      }
-
-if (price && tags) {
-        console.log("price and tags");
-        const filteredproducts = state.allproducts.filter((product) => {
-          return product.price >= price && product.tags.includes(tags);
-        });
-
-        state.filteredproducts = filteredproducts;
-      }
+}
 
 
 
-      if (category && tags) {
-        console.log("category and tags");
-        const filteredproducts = state.allproducts.filter((product) => {
-          return product.category === category && product.tags.includes(tags);
-        });
 
-        state.filteredproducts = filteredproducts;
-      }
-
-//------------------------------------------------------
-if (colors && tags) {
-        console.log("colors and tags");
-        const filter = state.allproducts.filter((product) => {
-          return product.colors.some((color) => color === colors) && product.tags.some((tag) => tag === tags);
-        //  return product.colors.includes(colors) && product.tags.includes(tags);
-        });
-
-        console.log("filter", filter);
-   // state after filter and update here
-   const _state = current(state);
-   const newState = {
-     ..._state,
-     filteredproducts: filter,
-   };
-
-   console.log("newState--->", newState);
-
-   return newState;
+    
+    
 
 
 
-      //  state.filteredproducts = filteredproducts;
-      }
 
+if (tags)
 
+{
+    console.log('tags  condition---->',tags);
 
-      if (price) {
-        console.log("price");
+    const _state = current(state)
 
-        const filteredproducts = state.allproducts.filter((product) => {
-          return product.price >= price;
-        });
-
-        state.filteredproducts = filteredproducts;
-      }
-
-      if (category) {
-        console.log("category");
-
-        const filtered = state.allproducts.filter((product) => {
-          return product.category === category;
-        });
-
-        console.log("filteredproducts--->", filtered);
-
-        //state.filteredproducts.push(...filteredproducts);
-        //state.filteredproducts = filteredproducts;
-      }
-
-      if (colors) {
-        console.log("colors");
-        console.log("getState current--->", current(state));
-
-        // state before filter
-
-        const _state = current(state);
-
-        const filter = state.allproducts.filter((product) => {
-          return product.colors.includes("black");
-        });
-
-        // state after filter and update here
+    const filter = _state.allproducts.filter((product) => {
+      //  return product.name
+      return product.name.includes('Penatibus parturient orci morbi');
+    });
+    
+    
+    console.log("filter--->", filter);
+  
+    
+    
+    const newState = {
+        ..._state,
+        filteredproducts: filter,
+       
         
-        const newState = {
-          ..._state,
-          filteredproducts: filter,
-        };
-
-        console.log("newState--->", newState);
-
-        return newState;
-      }
+    };
+    
+    console.log("newState--->",  _state.filteredproducts);
+    
+    return newState;
 
 
-if (tags) {
-        console.log("tags");
-        console.log("getState current--->", current(state));
-
-        // state before filter
-
-        const _state = current(state);
-
-        const filter = state.allproducts.filter((product) => {
-          return product.tags.includes("furniture");
-          return product.tags.some((tag) => tag === tags);
-         // return product.tags.includes(tags);
-        });
-
-        // state after filter and update here
-        
-        const newState = {
-          ..._state,
-          filteredproducts: filter,
-        };
-
-        console.log("newState--->", newState);
-
-        return newState;
-      }
 
 
-      const filteredproducts = state.allproducts.filter((product) => {
-        return (
-          product.category === category &&
-          product.price <= price &&
-          product.colors.some((color) => colors.includes(color))
-        );
-      });
 
-      // use current to get the current state of the store
 
-      state.filteredproducts = filteredproducts;
+
+
+}
+
     },
-  },
+    },
+
 });
 
 // Action creators are generated for each case reducer function
-export const { fetch_products, filter_multiple_products } =
-  productSlice.actions;
+export const { fetch_products, filter_products } =
+productSlice.actions;
 
 export default productSlice.reducer;

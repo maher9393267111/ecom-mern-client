@@ -1,12 +1,12 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import {useDispatch, useSelector} from 'react-redux'
-import {filter_multiple_products} from '../../redux/product'
+import {filter_products} from '../../redux/product'
 
 const Home = () => {
 
 const [colors, setColorss] = useState(['black','blue','grey']);
-const [tags, setTags] = useState(['furniture','electronics','sports']);
+const [tags, setTags] = useState(['furniture','electronics','sports','Cosmetics']);
 
 
 const dispatch = useDispatch();
@@ -18,10 +18,11 @@ const dispatch = useDispatch();
 
 // send colors to redux to filter products
 
-const filterProducts = (colors) => {
+const filterPro = () => {
 
     // colors:colors
-    dispatch(filter_multiple_products({tags:tags}));
+    //tags:tags
+    dispatch(filter_products({tags}));
 
 
 }
@@ -52,11 +53,15 @@ const filterProducts = (colors) => {
 
 
 <div className='btn'>
-    <button
-    type='submit'
-    onClick={() => filterProducts(colors)}
-    
-    >filter products</button>
+   
+<button
+onClick={filterPro}
+
+>
+    filter products
+</button>
+
+
 </div>
 
 
