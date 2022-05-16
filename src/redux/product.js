@@ -1,4 +1,5 @@
 import { createSlice, current } from "@reduxjs/toolkit";
+var _ = require('underscore');
 
 export const productSlice = createSlice({
     name: "product",
@@ -60,19 +61,62 @@ if (tags)
 
     const _state = current(state)
 
-    const filter = _state.allproducts.filter((product) => {
-      //  return product.name
-      return product.name.includes('Penatibus parturient orci morbi');
+
+// push all products tags to array ⚡⚡⚡
+
+
+    const tagsArray = _state.allproducts.map((product) => { 
+        return product.tags;
     });
+
+    console.log('tagsArray---->',tagsArray);
+
+    
+  
+    const filterpayloadtags = tags.filter((tag) => {
+        return tagsArray.some((item) => {
+            return item.includes(tag);
+        });
+    });
+
+    //------------------------------------------------------
+const filterPro =_state.allproducts.filter((product) => {
+    return tags.some((tag) => {
+        return tag.includes(product.tags);
+    });
+});
+
+console.log('filterPro---->',filterPro);
+
+
+
+//------------------------------------------------------
+
+
+   // console.log('filterpayloadtags---->',filterpayloadtags);
+
+    
+     //console.log(_.intersection(tagsArray, tags));
+
+
+
+
+
+  
+    // const filter = _state.allproducts.filter((product) => {
+    //     return product.tags.includes(tags);
+    // });
+
+ 
     
     
-    console.log("filter--->", filter);
+    
   
     
     
     const newState = {
         ..._state,
-        filteredproducts: filter,
+        // filteredproducts: filter,
        
         
     };
