@@ -45,22 +45,6 @@ dispatch(fetch_products(res.data));
 
 
 
-  useEffect(() => {
-  
-
-// fetch allproducts from database and set in redux product
-
-    const fetchProducts = async () => {
-      const res = await axios.get('http://localhost:5000/api/product/all-products');
-
-
-    }
-
-    
-    fetchProducts();
-
-  }, [dispatch]);
-
 
 
 
