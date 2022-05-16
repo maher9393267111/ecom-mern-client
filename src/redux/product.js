@@ -47,7 +47,7 @@ export const productSlice = createSlice({
         console.log("filterPro---->", filterPro);
       }
 
-      if (tags && colors &&  !category) {
+   else   if (tags && colors &&  !category) {
         console.log("tags and colors condition and category is undefined---->", tags, colors);
 
         const _state = current(state);
@@ -67,7 +67,7 @@ export const productSlice = createSlice({
         console.log("filterPro---->", filterPro);
       }
 
-      if (colors && !tags && category) {
+  else    if (colors && !tags && !category) {
         console.log("colors  condition---->", colors);
 
         const _state = current(state);
@@ -90,7 +90,41 @@ export const productSlice = createSlice({
         return newState;
       }
 
-      if (tags && !colors && category) {
+else if ( colors && category  && !tags) {
+
+console.log("colors and category condition---->", colors, category);
+
+        const _state = current(state);
+
+        const filterPro = _state.allproducts.filter((product) => {
+            return colors.some((color) => {
+                return color.includes(product.colors);
+            });
+            }
+        )
+        .filter((product) => {
+            return product.category === category;
+        }
+        );
+
+        console.log("filterPro---->", filterPro);
+
+
+        const newState = {
+            ..._state,
+            filteredproducts: filterPro,
+          };
+
+            return newState;
+
+
+}
+
+
+
+
+
+    else   if (tags && !colors && !category) {
         console.log("tags  condition---->", tags);
 
         const _state = current(state);
@@ -114,11 +148,48 @@ export const productSlice = createSlice({
       }
 
       // if tags and colors
+
+
+// colors and category
+
+
+
+
+
+
+
     },
+
+
+filter_by_price: (state, action) => {
+
+    const { price } = action.payload;
+    console.log("action payload ---->", price);
+    // price is object hav price min and max
+
+    const _state = current(state);
+
+    const filterPro = _state.allproducts.filter((product) => {
+
+        return product.price >= price.min && product.price <= price.max;
+    }
+    );
+
+    console.log("filterPro---->", filterPro);
+
+    const newState = {
+        ..._state,
+        filteredproducts: filterPro,
+        };
+
+        return newState;
+    }
+
+
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { fetch_products, filter_products } = productSlice.actions;
+export const { fetch_products, filter_products,filter_by_price } = productSlice.actions;
 
 export default productSlice.reducer;

@@ -1,13 +1,39 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import {useDispatch, useSelector} from 'react-redux'
-import {filter_products} from '../../redux/product'
+import {filter_products,filter_by_price} from '../../redux/product'
 
 const Home = () => {
 
 const [colors, setColorss] = useState(['black','blue','grey']);
-const [tags, setTags] = useState(['sports','shoes','clothes']);
-const [category, setCategory] = useState('62811666a43615d16337dc33');
+const [tags, setTags] = useState([]);
+const [category, setCategory] = useState('628115bca43615d16337dc29');
+
+// range price
+
+const [price, setPrice] = useState({
+    min: 0,
+    max: 200
+});
+// handle change price
+
+const handlePrice = (e) => {
+    const value = e.target.value;
+    setPrice({
+        ...price,
+        [e.target.name]: value
+    });
+    console.log("price---->", price);
+
+    // convert string to number
+    const min = parseInt(price.min);
+    console.log("min---->", min);
+    dispatch(filter_by_price({price}));
+};
+
+
+const [name, setName] = useState('');
+
 
 
 const dispatch = useDispatch();
@@ -21,9 +47,67 @@ const dispatch = useDispatch();
 
 const filterPro = () => {
 
-    // colors:colors
-    //tags:tags
-    dispatch(filter_products({tags,colors,category}));
+   
+// condition to send colors a tags to redux and category to redux when is not null
+
+if (colors.length > 0 && tags.length > 0 && category) {
+    console.log('all condition---->', colors, tags, category);
+
+    dispatch(filter_products({colors, tags, category}))
+
+}
+
+
+else if (colors.length > 0 && tags.length > 0 && category === null) {
+
+    console.log('colors and tags condition---->', colors, tags);
+    dispatch(filter_products({colors, tags}))
+
+}
+
+
+
+else if (colors.length > 0 && tags.length === 0 && category) {
+
+
+    console.log(' condition---->', colors,category);
+    dispatch(filter_products({colors, category}))
+
+}
+
+
+else if (colors.length > 0 && tags.length === 0 && category === null) {
+console.log(' condition---->', colors);
+
+    dispatch(filter_products({colors}))
+
+}
+
+else if (colors.length === 0 && tags.length > 0 && category) {
+console.log(' condition---->', tags, category);
+
+    dispatch(filter_products({tags, category}))
+
+}
+
+else if (colors.length === 0 && tags.length > 0 && category === null) {
+
+    console.log(' condition---->', tags);
+    dispatch(filter_products({tags}))
+
+}
+
+else if (colors.length === 0 && tags.length === 0 && category) {
+
+    console.log(' condition---->', category);
+    dispatch(filter_products({category}))
+
+}
+
+
+
+//
+ //   dispatch(filter_products({ tags : tags.length ? tags : undefined,colors}));
 
 
 }
@@ -64,6 +148,26 @@ onClick={filterPro}
 
 
 </div>
+
+  <div>
+
+
+<div>
+
+{/* --max price-- */}
+
+<input type="number" name='max' value={price.max}  onChange ={handlePrice} />
+
+
+
+<input type="number" name='min' value={price.min}  onChange ={handlePrice} />
+
+</div>
+
+
+  </div>
+
+
 
 
 
