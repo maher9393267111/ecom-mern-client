@@ -23,120 +23,68 @@ export const productSlice = createSlice({
 
 // check action.payload key and value
 
-if (colors)
+if (tags && colors)
 
-{console.log('colors condition ---->',colors);
+{
+    console.log('tags and colors condition---->',tags,colors);
 
-const filter = state.allproducts.filter((product) => {
-    return product.colors.includes(colors);
-});
+    const _state = current(state)
 
 
-const _state = current(state)
+    const filterPro =_state.allproducts.filter((product) => {
+        return colors.some((color) => {
+            return color.includes(product.colors);
+        });
+    }
+    ).filter((product) => {
+        return tags.some((tag) => {
+            return tag.includes(product.tags);
+        });
+    }
+    );
 
-const newState = {
-    ..._state,
-    filteredproducts: filter,
-};
 
-console.log("newState--->", newState);
+    console.log('filterPro---->',filterPro);
 
-return newState;
+
+
+
 
 }
 
 
 
 
-    
-    
 
-
-
-
-if (tags)
+if (colors)
 
 {
-    console.log('tags  condition---->',tags);
+    console.log('colors  condition---->',colors);
 
     const _state = current(state)
 
 
-// push all products tags to array ⚡⚡⚡
+//  ⚡⚡⚡
 
 
-    const tagsArray = _state.allproducts.map((product) => { 
-        return product.tags;
-    });
-
-    console.log('tagsArray---->',tagsArray);
-
-    
-  
-    const filterpayloadtags = tags.filter((tag) => {
-        return tagsArray.some((item) => {
-            return item.includes(tag);
-        });
-    });
-
-    //------------------------------------------------------
+   
 const filterPro =_state.allproducts.filter((product) => {
-    return tags.some((tag) => {
-        return tag.includes(product.tags);
+    return colors.some((color) => {
+        return color.includes(product.colors);
     });
 });
 
-//console.log('filterPro---->',filterPro);
-
-
-
-const filterPro2 =_state.allproducts.filter((product) => {
-    return tags.some((tag) => {
-        //console.log('tag---->',tag);
-        return tag == (product.tags.map((item) => {
-            return item;
-
-        }));
-    });
-    ;
-});
-
-console.log('filterPro2---->',filterPro2);
-
-
-
-//------------------------------------------------------
-
-
-   // console.log('filterpayloadtags---->',filterpayloadtags);
-
-    
-     //console.log(_.intersection(tagsArray, tags));
-
-
-
-
+console.log('filterProduct by colors---->',filterPro);
 
   
-    // const filter = _state.allproducts.filter((product) => {
-    //     return product.tags.includes(tags);
-    // });
-
- 
-    
-    
-    
-  
-    
-    
     const newState = {
         ..._state,
-        // filteredproducts: filter,
+         filteredproducts: filterPro,
        
         
     };
     
-    console.log("newState--->",  _state.filteredproducts);
+ 
     
     return newState;
 
@@ -149,7 +97,57 @@ console.log('filterPro2---->',filterPro2);
 
 }
 
-    },
+
+
+    
+
+if (tags)
+
+{
+    console.log('tags  condition---->',tags);
+
+    const _state = current(state)
+
+
+//  ⚡⚡⚡
+
+
+   
+const filterPro =_state.allproducts.filter((product) => {
+    return tags.some((tag) => {
+        return tag.includes(product.tags);
+    });
+});
+
+console.log('filterPro---->',filterPro);
+
+  
+    const newState = {
+        ..._state,
+         filteredproducts: filterPro,
+       
+        
+    };
+    
+ 
+    
+    return newState;
+
+
+
+
+
+
+
+
+}
+
+
+// if tags and colors 
+
+
+
+    }
     },
 
 });
