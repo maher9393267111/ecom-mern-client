@@ -5,7 +5,8 @@ import {filter_multiple_products} from '../../redux/product'
 
 const Home = () => {
 
-const [colors, setColors] = useState(['black','blue','green']);
+const [colors, setColorss] = useState(['black','blue','grey']);
+const [tags, setTags] = useState(['furniture','electronics','sports']);
 
 
 const dispatch = useDispatch();
@@ -19,7 +20,8 @@ const dispatch = useDispatch();
 
 const filterProducts = (colors) => {
 
-    dispatch(filter_multiple_products({colors:colors}));
+    // colors:colors
+    dispatch(filter_multiple_products({tags:tags}));
 
 
 }
