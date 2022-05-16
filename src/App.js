@@ -9,7 +9,7 @@ import {useState, useEffect} from 'react';
 import axios from 'axios';
 import {useDispatch, useSelector} from 'react-redux';
 import { fetch_categories } from './redux/category';
-import { fetch_products } from './redux/product';
+import { fetch_products,productsColors } from './redux/product';
 import Home from './pages/home/index';
 import Category from './pages/category/index';
 import Product from './pages/product';
@@ -40,6 +40,12 @@ dispatch(fetch_products(res.data));
 
     fetchCategories();
     fetchProducts();
+
+setTimeout(() => {
+  dispatch(productsColors());
+}, 2000);
+
+    
 
   }, [dispatch]);
 

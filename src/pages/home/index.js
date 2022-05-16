@@ -157,86 +157,35 @@ function onChange(value) {
 
 
     return (
-        <div className='container'>
-            <div >
-                <h1 className='mx-auto w-[230px] p-[12px] rounded-lg text-center bg-yellow-100 '>Home Page</h1>
-            </div>
+      <div className='container '>
+
+<div className=' text-center text-xl'>
 
 
-<div>
-<h1>
-{allproducts.length} All products
-</h1>
-
-
-<h2>
-{filteredproducts.length} Filtered products
-</h2>
-
+<h1 className=' w-[200px] mx-auto bg-yellow-200 p-[12px] rounded-xl'> Home Page</h1>
 
 
 </div>
 
 
-<div className='btn'>
-   
-<button
-onClick={filterPro}
+<div className='grid-filter-products grid sm:grid-cols-6  lg:grid-cols-12'>
 
->
-    filter products
-</button>
+{/* -----filter-side--- */}
 
-
-</div>
-
-  <div>
-
-
-<div>
-
-{/* --max price-- */}
-
-<input type="number" name='max' value={price.max}  onChange ={handlePrice} />
-
-
-
-<input type="number" name='min' value={price.min}  onChange ={handlePrice} />
-
+<div className=' bg-yellow-200 sm:col-span-6 lg:col-span-4'>
+sidebar
 </div>
 
 
-  </div>
 
+{/* -all products-- */}
 
-<div>
+<div className=' bg-green-200 sm:col-span-6 lg:col-span-8'>
 
-<>
-    
-    <Slider
-    className='slider  text-center w-[400px]'
-      range
-      marks={true}
-        min={0}
-        max={300}
-      step={10}
-      defaultValue={[10, 288]}
-      onChange={onChange}
-      onAfterChange={onAfterChange}
-    />
-  </>
-
-
-{/* -total price- */}
-
-<div>
-
-<h1 className=''
-onClick={total}
-
->  Total prices</h1>
-
+all
 </div>
+
+
 
 
 </div>
@@ -246,7 +195,9 @@ onClick={total}
 
 
 
-        </div>
+
+
+      </div>
     );
 }
 
