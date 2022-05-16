@@ -86,7 +86,22 @@ const filterPro =_state.allproducts.filter((product) => {
     });
 });
 
-console.log('filterPro---->',filterPro);
+//console.log('filterPro---->',filterPro);
+
+
+
+const filterPro2 =_state.allproducts.filter((product) => {
+    return tags.some((tag) => {
+        //console.log('tag---->',tag);
+        return tag == (product.tags.map((item) => {
+            return item;
+
+        }));
+    });
+    ;
+});
+
+console.log('filterPro2---->',filterPro2);
 
 
 
