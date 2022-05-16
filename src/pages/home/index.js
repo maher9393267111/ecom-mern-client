@@ -3,6 +3,8 @@ import { Slider } from 'antd';
 import { useState, useEffect } from 'react';
 import {useDispatch, useSelector} from 'react-redux'
 import {filter_products,filter_by_price,products_totalprice} from '../../redux/product'
+import Allproducts from '../../components/home';
+import SideBar from '../../components/sidebar';
 var _ = require("underscore");
 
 const Home = () => {
@@ -162,27 +164,30 @@ function onChange(value) {
 <div className=' text-center text-xl'>
 
 
-<h1 className=' w-[200px] mx-auto bg-yellow-200 p-[12px] rounded-xl'> Home Page</h1>
+<h1 className=' w-[200px] mx-auto  p-[12px] rounded-xl'> Home Page</h1>
 
 
 </div>
 
 
-<div className='grid-filter-products grid sm:grid-cols-6  lg:grid-cols-12'>
+<div className='grid-filter-products pl-[20px] sm:w-[100vw] pr-[22px] grid sm:grid-cols-6  lg:grid-cols-12'>
 
 {/* -----filter-side--- */}
 
-<div className=' bg-yellow-200 sm:col-span-6 lg:col-span-4'>
-sidebar
+<div className=' sm:col-span-6 lg:col-span-4'>
+
+<SideBar/>
+
+
 </div>
 
 
 
 {/* -all products-- */}
 
-<div className=' bg-green-200 sm:col-span-6 lg:col-span-8'>
+<div className='   sm:col-span-6 lg:col-span-8'>
 
-all
+<Allproducts />
 </div>
 
 

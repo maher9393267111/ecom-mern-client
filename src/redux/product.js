@@ -161,12 +161,19 @@ const _state = current(state);
 
 // use _underscore to get unique colors from all products
 
-const colors = _.uniq(_state.allproducts.map((product) => {
+const colors = (_state.allproducts.map((product) => {
     return product.colors.map((color) => {
         console.log("color---->", color);
         return color;
     });
     }));
+
+
+
+
+const colorsconcat = _.uniq(_.flatten(colors));
+
+console.log("colorsconcat---->", colorsconcat);
 
 
     const tagsArray = _state.allproducts.map((product) => { 
@@ -176,20 +183,20 @@ const colors = _.uniq(_state.allproducts.map((product) => {
     console.log('tagsArray---->',tagsArray);
   
 
-  // concat all arrays in tagsArray and uniq it
+  // concat all arrays in tagsArray and uniqe it
 
-    const tags = _.uniq(_.flatten(tagsArray));
+    const tagsconcat = _.uniq(_.flatten(tagsArray));
 
   
     
 
-    console.log("tags unique---->", tags);
+    console.log("tags unique---->", tagsconcat);
  
 
     const newState = {
         ..._state,
         colors: colors,
-        tags: tagsArray,
+        tags: tagsconcat,
     };
 
 return newState;
