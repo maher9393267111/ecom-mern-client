@@ -6,7 +6,8 @@ import {filter_products} from '../../redux/product'
 const Home = () => {
 
 const [colors, setColorss] = useState(['black','blue','grey']);
-const [tags, setTags] = useState(['Cosmetics']);
+const [tags, setTags] = useState(['sports','shoes','clothes']);
+const [category, setCategory] = useState('62811666a43615d16337dc33');
 
 
 const dispatch = useDispatch();
@@ -22,7 +23,7 @@ const filterPro = () => {
 
     // colors:colors
     //tags:tags
-    dispatch(filter_products({tags,colors}));
+    dispatch(filter_products({tags,colors,category}));
 
 
 }
