@@ -14,12 +14,26 @@ export const productSlice = createSlice({
     colors: [],
     tags: [],
     prices: [], 
+    pageredux : 1,
   },
 
   reducers: {
     fetch_products: (state, action) => {
       state.allproducts = action.payload;
     },
+
+
+// make pagination with page change
+
+    handlePageChange: (state, action) => {
+
+const _state = current(state);
+
+        _state.pageredux = action.payload.page;
+        console.log('page', _state.pageredux);
+    }
+    ,
+
 
     filter_products: (state, action) => {
       const { colors, tags, price, category, name, discount } = action.payload;
@@ -260,6 +274,7 @@ export const {
   filter_by_price,
 productsColors,
   products_totalprice,
+  handlePageChange,
 } = productSlice.actions;
 
 export default productSlice.reducer;
