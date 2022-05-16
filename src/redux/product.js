@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice,current } from "@reduxjs/toolkit";
 
 export const productSlice = createSlice({
   name: "product",
@@ -18,6 +18,8 @@ Show:false,
     },
 
 filter_products: (state, action) => {
+
+
   state.filteredproducts = action.payload;
 
    const filteredproducts = state.allproducts.filter(product => {
@@ -40,6 +42,7 @@ filter_multiple_products: (state, action) => {
 
 
 if (price && category && colors) {
+  console.log("price and category and colors");
   const filteredproducts = state.allproducts.filter(product => {
     return product.category === category && product.price >= price && product.colors.includes(colors);
   }
@@ -49,6 +52,7 @@ if (price && category && colors) {
 }
 
 if (price && category) {
+  console.log("price and category");
   const filteredproducts = state.allproducts.filter(product => {
     return product.category === category && product.price >= price;
   }
@@ -58,6 +62,7 @@ if (price && category) {
 }
 
 if (price && colors) {
+  console.log("price and colors");
   const filteredproducts = state.allproducts.filter(product => {
     return product.price >= price && product.colors.includes(colors);
   }
@@ -68,6 +73,7 @@ if (price && colors) {
 
 
 if (category && colors) {
+  console.log("category and colors");
 
 
    const  filteredproducts = state.allproducts.filter(product => {
@@ -82,6 +88,7 @@ if (category && colors) {
 
 if (price) {
 
+  console.log("price");
 
     const  filteredproducts = state.allproducts.filter(product => {
 
@@ -99,9 +106,10 @@ if (price) {
 
 
 if (category) {
+  console.log("category");
 
 
-    const  filteredproducts = state.allproducts.filter(product => {
+    const  filtered = state.allproducts.filter(product => {
 
     return product.category === category;
 
@@ -109,7 +117,11 @@ if (category) {
 
   );
 
-  state.filteredproducts = filteredproducts;
+
+console.log("filteredproducts--->",filtered);
+
+//state.filteredproducts.push(...filteredproducts);
+  //state.filteredproducts = filteredproducts;
 
 
 }
@@ -117,17 +129,39 @@ if (category) {
 
 if (colors) {
 
+  console.log("colors");
+  console.log("getState current--->",current(state));
 
 
-    const  filteredproducts = state.allproducts.filter(product => {
+  const _state = current(state)
 
-    return product.colors.includes(colors);
+
+   
+
+    const  filter = state.allproducts.filter(product => {
+
+    return product.colors.includes('black');
 
   }
 
   );
+  
+  const newState = {
+    ..._state,
+    filteredproducts: filter,
+      
+    }
 
-  state.filteredproducts = filteredproducts;
+    
+  console.log("newState--->",newState);
+
+return newState;
+
+
+     
+
+
+
 
 
 }
@@ -144,6 +178,11 @@ if (colors) {
  }
 
   );
+
+
+// use current to get the current state of the store
+
+
 
   state.filteredproducts = filteredproducts;
 
