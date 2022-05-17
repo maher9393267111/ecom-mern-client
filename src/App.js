@@ -13,6 +13,7 @@ import { fetch_products,productsColors } from './redux/product';
 import Home from './pages/home/index';
 import Category from './pages/category/index';
 import Product from './pages/product';
+import Cartbar from './components/cartbar';
 
 
 function App() {
@@ -60,6 +61,8 @@ setTimeout(() => {
     <div className="App">
       {/*  sabit  */}
    <h1 className='  bg-green-300 text-2xl p-[8px] text-center'>Ecomemrce template</h1>   
+
+   <Cartbar />
 
    <BrowserRouter>
     <Routes>

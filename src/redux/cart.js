@@ -7,7 +7,7 @@ export const cartSlice = createSlice({
     cart: [],
     cartdata:[],
     open: false,
-    toggle: false,
+    togglecartbar: false,
     //quantity : 0,
     namecart: "maher",
     addedMessage: "empty",
@@ -32,14 +32,25 @@ console.log("action---->", action.payload);
       }
 
       state.cart = newCart;
+      state.togglecartbar = !state.togglecartbar;
 
 
 
 
-    }
+    },
 
 
     //-----------------------------------------------------//
+
+openbar: (state,action) => 
+
+{
+ // state.togglecartbar = true;
+  state.togglecartbar = !state.togglecartbar;
+  console.log("action---->",state.togglecartbar );
+}
+
+
 
   },
 });
@@ -48,6 +59,6 @@ console.log("action---->", action.payload);
 
 
 // Action creators are generated for each case reducer function
-export const { addTo_cart } = cartSlice.actions;
+export const { addTo_cart,openbar } = cartSlice.actions;
 
 export default cartSlice.reducer;
