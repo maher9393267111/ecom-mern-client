@@ -1,5 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { addTo_cart } from "../../redux/cart";
+import { useDispatch,useSelector } from "react-redux";
 
 import { Card } from "antd";
 import { AiOutlineHeart } from "react-icons/ai";
@@ -8,6 +10,7 @@ import { AiOutlineShoppingCart } from "react-icons/ai";
 
 import { BiSearchAlt2 } from "react-icons/bi";
 import { FcShare } from "react-icons/fc";
+import ReactTooltip from 'react-tooltip'
 
 const { Meta } = Card;
 
@@ -26,6 +29,38 @@ const ProductCard = ({ product,page }) => {
     colorimages,
     
   } = product;
+
+// addd to cart redux
+
+const dispatch = useDispatch();
+
+
+
+const addToCart = (product) => { 
+  
+  dispatch(addTo_cart(product._id))
+
+
+  
+// const newproduct = Object.assign({quantity}, product);
+// console.log("newproduct---->", newproduct);
+
+
+
+};  
+
+
+
+
+
+
+
+
+
+
+const { cart,namecart,addedMessage } = useSelector(state => state.cart);
+
+
 
   //const [imageset, setImageset] = useState(images[0].secure_url);
   const [show, setShow] = useState(false);
@@ -64,6 +99,7 @@ setIndex(index);
     <div className="wrapper-card p-[2px] m-[8px] mt-[30px]  mb-[30px]">
       <div>
         {/* -image-div--- */}
+
 
         <div className="image-div w-[100%] h-[288px]">
           <img
@@ -117,6 +153,12 @@ setIndex(index);
 
    Product-Category : {category1}
 
+   <h1    onClick={() => addToCart(product)}>
+   {  addedMessage}
+   </h1>
+
+  
+
 
 </h1>
 
@@ -147,11 +189,24 @@ setIndex(index);
                 <AiOutlineHeart className="text-red-600  text-[30px]" />
               </div>
 
-              <div>
-                <AiOutlineShoppingCart className="text-red-600  text-[30px]" />
+              <div  
+           
+              data-tip data-for={'admin'}>
+                <AiOutlineShoppingCart 
+              
+                className="text-red-600  text-[30px]" >  </AiOutlineShoppingCart>
+                          <ReactTooltip
+                          
+                          
+                          id="admin" place="top" type="dark" effect="solid">
+            Add to Cart
+          </ReactTooltip>
+
               </div>
 
               <div>
+         
+
                 <BiSearchAlt2 className="text-red-600  text-[30px]" />
               </div>
             </div>

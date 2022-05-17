@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { filter_by_price, filter_products, handle_condition } from "../../redux/product";
 import { Slider } from "antd";
+import {FiX, FiXCircle} from "react-icons/fi";
+import ReactTooltip from "react-tooltip";
 
 const SideBar = () => {
   const dispatch = useDispatch();
@@ -28,6 +30,16 @@ const SideBar = () => {
   const handleColor = (color) => {
     setColorArray([...colorArray, color]);
 
+// if exist an array pull color from tags array
+
+if (colorArray.includes(color)) {
+
+setColorArray(colorArray.filter((item) => item !== color));
+
+}
+
+
+
     console.log("colorArray---->", colorArray);
 
     if (colorArray.length > 0) {
@@ -40,11 +52,22 @@ const SideBar = () => {
 
 // handle category clicked
 
-const handleCategory = (category) => {
+const handleCategory = (categoryarg) => {
 
-setCategory(category);
+setCategory(categoryarg);
 
-console.log("category---->", category);
+console.log("category---->", categoryarg);
+
+// if exist make category null
+
+
+ if (category === categoryarg) {
+
+setCategory(null);
+
+ }
+
+
 
 
 }
@@ -63,7 +86,7 @@ console.log("category---->", category);
 
     // only price condition
     else if (
-      price &&
+      price.max !==0 &&
       category === null &&
       tags.length === 0 &&
       colorArray.length === 0
@@ -72,7 +95,7 @@ console.log("category---->", category);
 
       //dispatch(filter_by_price({price})) ----->itis work
 
-      dispatch(filter_products({ price }));
+        dispatch(filter_products({ price }));
       dispatch(handle_condition({ condition: 2 }));
     }
 
@@ -126,7 +149,7 @@ dispatch(handle_condition({ condition: 6 }));
     ) {
       console.log(" condition only colors---->", colors);
 
-      dispatch(filter_products({ colorArray }));
+      dispatch(filter_products({ colors:colorArray }));
       dispatch(handle_condition({ condition: 8 }));
     } else if (colorArray.length === 0 && tags.length > 0 && category) {
       console.log(" condition  colors and tags and category ---->", tags, category);
@@ -159,7 +182,7 @@ dispatch(handle_condition({ condition: 6 }));
     
     // category and and price  and colors condition
 
-    else if (category && price  && colorArray.length > 0 && tags.length === 0) {
+    else if (category && price.max !==0  && colorArray.length > 0 && tags.length === 0) {
 
         console.log("category and price and colorsss condition in component---->", category, price);
 
@@ -245,24 +268,39 @@ dispatch(handle_condition({ condition: 6 }));
       {/* --colors filter--- */}
 
       <div className="  mx-10">
-        <div>
+        <div className="  parent">
           {colors.map((color) => (
-            <div>
+            <div className="flex gap-5">
               <h1
                 onClick={(e) => {
                   handleColor(color);
                 }}
-                className=" text-center font-bold text-white w-[55px] p-[7px] rounded-[50%]"
+                className=" text-center font-bold text-white w-[55px] p-[15px] rounded-[50%]"
                 style={{
                   backgroundColor: color ? color : "",
-                  color: color === "beige" ? "black" : "",
+                  color: color === "beige" ? "black" : "white",
                 }}
               >
-                {color}
+                 <h1  >
+               
+                 </h1>
+                  
+             
+           
+           
+             
               </h1>
+
+            { colorArray.includes(color)  ? (  <h1> <FiX className=" font-bold    self-center  text-2xl"></FiX></h1>) : ('')  }  
             </div>
           ))}
+
+
+
         </div>
+
+
+
       </div>
 
 
@@ -279,13 +317,13 @@ dispatch(handle_condition({ condition: 6 }));
 <div className="h-[300px]  overflow-y-scroll">
 
 
-{allcategories.map((category) => (
+{allcategories.map((categorym) => (
     
 <div className="text-[17px] mt-[6px] font-bold">
 
 <h1 
-onClick={ (e)=>  handleCategory(category._id) }
-className="font-bold">{category.name}</h1>
+onClick={ (e)=>  handleCategory(categorym._id) }
+className= {`${category === categorym._id ? '  bg-red-500 text-white w-[140px] text-center' : ''}  `}>{categorym.name}</h1>
 
 
 </div>

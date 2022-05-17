@@ -204,7 +204,8 @@ return newState;
 
         const filterPro = _state.allproducts.filter((product) => {
           return colors.some((color) => {
-            return color.includes(product.colors);
+            ///// return color.includes(product.colors);   falseee
+            return product.colors.includes(color); // trueee some colors from action.payload includes in product.colors
           });
         });
 
@@ -213,6 +214,9 @@ return newState;
         const newState = {
           ..._state,
           filteredproducts: filterPro,
+          filtered: true,
+          filterebyText: ' filter products by Product colors only',
+          
         };
 
         return newState;
@@ -320,9 +324,10 @@ return newState;
         return newState;
       }
 
-      // if tags and colors
 
-      // colors and category
+
+
+      
     },
 
 
