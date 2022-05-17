@@ -24,12 +24,19 @@ const ProductCard = ({ product,page }) => {
     description,
     discount,
     colorimages,
+    
   } = product;
 
   //const [imageset, setImageset] = useState(images[0].secure_url);
   const [show, setShow] = useState(false);
   const [togglecolorimage, setTogglecolorimage] = useState(false);
   const [index , setIndex] = useState(0);
+
+// ---// category-
+
+const category1 =  product.category.name;
+
+console.log("category1---->", category1);
 
 
 useEffect(() => {
@@ -58,7 +65,7 @@ setIndex(index);
       <div>
         {/* -image-div--- */}
 
-        <div className="image-div w-[100%] h-[255px]">
+        <div className="image-div w-[100%] h-[288px]">
           <img
             className="w-[100%] h-[100%] object-content"
             // src={imageset}
@@ -95,7 +102,27 @@ setIndex(index);
         <div className="info">
           <div className="text-center  font-bold text-[17px] ">
             <h1>{name}</h1>
+
+<h1 className="  mt-[8px] mb-2  bg-blue-300 rounded-md">  {price}</h1>
+
           </div>
+
+
+{/* ---category name--- */}
+
+
+<div>
+
+<h1 className="  bg-cyan-300 text-center p-[8px] font-bold text-md">
+
+   Product-Category : {category1}
+
+
+</h1>
+
+</div>
+
+
 
           {/* --tags-- */}
 
@@ -105,7 +132,7 @@ setIndex(index);
                 tags.map((tag, index) => {
                   return (
                     <div className="single-tag">
-                      <h1 className="font-bold"> {tag}</h1>
+                      <h1 className="font-bold"> {tag}    </h1>
                     </div>
                   );
                 })}
