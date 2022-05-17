@@ -38,12 +38,15 @@ const dispatch = useDispatch();
 
 const addToCart = (product) => { 
   
-  dispatch(addTo_cart(product._id))
+  //dispatch(addTo_cart(product._id))
 
 
-  
-// const newproduct = Object.assign({quantity}, product);
-// console.log("newproduct---->", newproduct);
+  let quantity
+ const newproduct = Object.assign({},{name:product.name},{_id:product._id} ,{price:product.price},{quantity:1});
+ console.log("newproduct---->", newproduct);
+
+dispatch(addTo_cart(newproduct))
+
 
 
 
@@ -71,7 +74,7 @@ const { cart,namecart,addedMessage } = useSelector(state => state.cart);
 
 const category1 =  product.category.name;
 
-console.log("category1---->", category1);
+//console.log("category1---->", category1);
 
 
 useEffect(() => {
