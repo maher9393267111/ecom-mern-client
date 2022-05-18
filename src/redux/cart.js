@@ -13,6 +13,7 @@ export const cartSlice = createSlice({
     addedMessage: "empty",
     emptyobj: {},
     totalprice: 0,
+    singlecartitem: {},
   },
 
   reducers: {
@@ -145,7 +146,36 @@ openfromaddcart: (state,action) =>
 
 {
 state.togglecartbar = true
-}
+},
+
+showsinglecartinfo: (state,action) =>{ 
+
+const { id } = action.payload;
+console.log("id  in redux single product", id);
+
+// find product in cart by id
+const _state = current(state);
+
+  const product = _state.cart.find((product) => product._id === id);
+
+  
+state.singlecartitem = product;        // is working
+
+
+// ------- is work
+
+//   console.log("product---->", product);
+
+//   console.log("singlecartitem From Redux---->", _state.singlecartitem);
+
+// const newState = {...state,singlecartitem:product};
+
+// return newState;
+
+
+
+
+  }
 
 
 
@@ -158,6 +188,6 @@ state.togglecartbar = true
 
 
 // Action creators are generated for each case reducer function
-export const { addTo_cart,openbar,openfromaddcart, decreaseQuantity,    increaseQuantity } = cartSlice.actions;
+export const { addTo_cart,openbar,openfromaddcart, decreaseQuantity,    increaseQuantity,showsinglecartinfo, } = cartSlice.actions;
 
 export default cartSlice.reducer;

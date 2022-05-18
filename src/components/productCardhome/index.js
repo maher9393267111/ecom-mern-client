@@ -4,6 +4,7 @@ import { addTo_cart,openfromaddcart } from "../../redux/cart";
 import { useDispatch,useSelector } from "react-redux";
 import { ToastContainer, toast } from 'react-toastify';
 import { Card } from "antd";
+import { Link } from "react-router-dom";
 import { AiOutlineHeart } from "react-icons/ai";
 
 import { AiOutlineShoppingCart } from "react-icons/ai";
@@ -208,6 +209,7 @@ setIndex(index);
           </ReactTooltip>
 
               </div>
+<Link to={`product/${product._id}`}>
 
               <div  data-tip data-for={'product-details'}>
          
@@ -224,6 +226,7 @@ setIndex(index);
 
 
               </div>
+              </Link>
             </div>
           </div>
         </div>
