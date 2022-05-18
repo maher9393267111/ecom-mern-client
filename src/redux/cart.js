@@ -5,7 +5,7 @@ export const cartSlice = createSlice({
   initialState: {
     //cart : [{name:'',quantity:0,_id:'',price:0 ,total:0}],
     cart: [],
-    cartdata:[],
+    cartlocal:[],
     open: false,
     togglecartbar: false,
     //quantity : 0,
@@ -32,6 +32,10 @@ console.log("action---->", action.payload);
       }
 
       state.cart = newCart;
+      // sabe in local storage
+     localStorage.setItem("cart", JSON.stringify(newCart));
+
+     state.cartlocal = JSON.parse(localStorage.getItem("cart"));
       state.togglecartbar = !state.togglecartbar;
 
 

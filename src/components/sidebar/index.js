@@ -200,7 +200,17 @@ dispatch(handle_condition({ condition: 6 }));
       dispatch(filter_products({ category }));
     }
 
+// category and colors only condition
 
+    else if (category && colorArray.length > 0 && tags.length === 0 && price.max ==0)   {
+
+
+console.log("category and colors only condition in component---->", category, colorArray);
+
+dispatch(filter_products({ category, colors:colorArray }));
+
+
+    }
 
 
 

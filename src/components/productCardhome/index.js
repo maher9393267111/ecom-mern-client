@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { addTo_cart } from "../../redux/cart";
 import { useDispatch,useSelector } from "react-redux";
-
+import { ToastContainer, toast } from 'react-toastify';
 import { Card } from "antd";
 import { AiOutlineHeart } from "react-icons/ai";
 
@@ -42,10 +42,12 @@ const addToCart = (product) => {
 
 
   let quantity
- const newproduct = Object.assign({},{name:product.name},{_id:product._id} ,{price:product.price},{quantity:1});
+ const newproduct = Object.assign({},{name:product.name},{_id:product._id} ,{image:product.images[0].secure_url},{price:product.price},{quantity:1});
  console.log("newproduct---->", newproduct);
 
 dispatch(addTo_cart(newproduct))
+
+toast.success(`${product.name} added to cart`);
 
 
 
@@ -155,10 +157,10 @@ setIndex(index);
 <h1 className="  bg-cyan-300 text-center p-[8px] font-bold text-md">
 
    Product-Category : {category1}
-
+{/* 
    <h1    onClick={() => addToCart(product)}>
    {  addedMessage}
-   </h1>
+   </h1> */}
 
   
 
@@ -195,7 +197,7 @@ setIndex(index);
               <div  
            
               data-tip data-for={'admin'}>
-                <AiOutlineShoppingCart 
+                <AiOutlineShoppingCart onClick={() => addToCart(product)}
               
                 className="text-red-600  text-[30px]" >  </AiOutlineShoppingCart>
                           <ReactTooltip

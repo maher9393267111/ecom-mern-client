@@ -78,6 +78,38 @@ return newState;
 }
 
 
+// catgory and colors only
+else if ( category && colors  && !tags && !price) {
+
+console.log('category and colors condition in Redux---->', category, colors);
+
+const _state = current(state);
+const filteredproducts = _state.allproducts.filter((product) => {
+
+ 
+
+//return colors.some((color) => product.colors.includes(color)) && product.category._id === category; // work
+
+return product.colors.some((color) => colors.includes(color)) && product.category._id === category;  // work
+
+
+ 
+
+}
+) ;
+
+console.log('filteredproducts', filteredproducts);
+
+const newState = { ...state, filteredproducts: filteredproducts,filtered: true, filterebyText: ' filter  by Category and  Product colors' };
+
+return newState;
+
+
+
+}
+
+
+
 
 // category and colors and price
 

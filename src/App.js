@@ -16,12 +16,14 @@ import Product from './pages/product';
 import Cartbar from './components/cartbar';
 
 
+
 function App() {
 
 // fetch all categories from database and set in redux category
 
 
   const dispatch = useDispatch();
+  const {togglecartbar} = useSelector(state => state.cart);
 
 
   useEffect(() => {
@@ -62,7 +64,7 @@ setTimeout(() => {
       {/*  sabit  */}
    <h1 className='  bg-green-300 text-2xl p-[8px] text-center'>Ecomemrce template</h1>   
 
-   <Cartbar />
+   { togglecartbar && <Cartbar /> }
 
    <BrowserRouter>
     <Routes>

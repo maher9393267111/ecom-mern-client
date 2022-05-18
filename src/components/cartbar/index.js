@@ -1,54 +1,79 @@
 import React from "react";
-import Sidebar from "react-sidebar";
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useState, useEffect } from "react";
+import { IoCloseCircleOutline } from "react-icons/io5";
 import { openbar } from "../../redux/cart";
-import { useState } from "react";
+import { motion, useMotionValue } from "framer-motion";
+import Cartitems from "./cartitems";
+const Bar = () => {
+  const dispatch = useDispatch();
+  //handle close bar
 
-const Cartbar  = () => {
+  //redux state
+  const { togglecartbar,cart } = useSelector((state) => state.cart);
 
-    const dispatch = useDispatch();
-    const {  togglecartbar } = useSelector(state => state.cart);
-
-
-const [sidebarOpen, setSidebarOpen] = useState(true);
-
-
- const  onSetSidebarOpen = (open)=> {
- 
-    //setSidebarOpen(open);
+  const closebar = () => {
     dispatch(openbar());
-    console.log("openbar clicked", );
-  }
-
-//   render() {
-    return (
-      <Sidebar
-        sidebar={<b>Sidebar content</b>}
-        open={togglecartbar}
-        // open={sidebarOpen}
-        onSetOpen={onSetSidebarOpen}
-        styles={{ sidebar: { background: "white" ,width:'300px'} }}
-      >
-        <button onClick={ onSetSidebarOpen}>
-          Open sidebar
-        </button>
-      </Sidebar>
-    );
-//   }
-}
-
-export default Cartbar;
+  };
 
 
 
-// import React from 'react';
+  // if (!togglecartbar) {
 
-// const Index = () => {
-//     return (
-//         <div>
-            
-//         </div>
-//     );
-// }
+  // return
 
-// export default Index;
+  // }
+
+  const showAnimation = {
+    hidden: {
+      width: 0,
+      opacity: 0,
+      transition: {
+        duration: 0.5,
+      },
+    },
+    show: {
+      opacity: 1,
+      with: "400px",
+
+      transition: {
+        duration: 0.5,
+      },
+    },
+  };
+
+  return (
+    <motion.div
+      variants={showAnimation}
+      initial="hidden"
+      animate="show"
+      exit="hidden"
+    >
+      <div className=" fixed top-0 bottom-0 left-0 w-[366px] bg-white  z-10 ">
+        <div>
+          <div className=" flex  justify-between p-[20px]">
+            <h1 className=" font-bold text-xl">Cartbar </h1>
+            <h1 onClick={closebar} className="  self-center text-[28px]">
+              <IoCloseCircleOutline />
+            </h1>
+          </div>
+        </div>
+
+{/* ------cartitems------ */}
+<div>
+
+    <Cartitems />
+
+
+
+
+
+</div>
+
+
+      </div>
+    </motion.div>
+  );
+};
+
+export default Bar;
