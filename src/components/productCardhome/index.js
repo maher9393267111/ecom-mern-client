@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { addTo_cart } from "../../redux/cart";
+import { addTo_cart,openfromaddcart } from "../../redux/cart";
 import { useDispatch,useSelector } from "react-redux";
 import { ToastContainer, toast } from 'react-toastify';
 import { Card } from "antd";
@@ -209,10 +209,20 @@ setIndex(index);
 
               </div>
 
-              <div>
+              <div  data-tip data-for={'product-details'}>
          
 
                 <BiSearchAlt2 className="text-red-600  text-[30px]" />
+
+                <ReactTooltip
+                          
+                          
+                          id="product-details" place="top" type="dark" effect="solid">
+            Product Details
+          </ReactTooltip>
+             
+
+
               </div>
             </div>
           </div>

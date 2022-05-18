@@ -16,6 +16,7 @@ import Product from './pages/product';
 import Cartbar from './components/cartbar';
 import 'react-toastify/dist/ReactToastify.css';
 import {ToastContainer} from 'react-toastify';
+import SingleProduct from './pages/singleProduct';
 
 
 
@@ -80,6 +81,11 @@ setTimeout(() => {
 
 <Route path ='product' element = {<Product />} />
 
+
+{/* //:id is used to get the id of product */}
+
+
+<Route path ='/product/:id' element = {<SingleProduct />} />
         {/* </Route> */}
        
         
