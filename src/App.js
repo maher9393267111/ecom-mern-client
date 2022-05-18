@@ -14,6 +14,8 @@ import Home from './pages/home/index';
 import Category from './pages/category/index';
 import Product from './pages/product';
 import Cartbar from './components/cartbar';
+import 'react-toastify/dist/ReactToastify.css';
+import {ToastContainer} from 'react-toastify';
 
 
 
@@ -61,9 +63,11 @@ setTimeout(() => {
 
   return (
     <div className="App">
+
       {/*  sabit  */}
    <h1 className='  bg-green-300 text-2xl p-[8px] text-center'>Ecomemrce template</h1>   
 
+   <ToastContainer theme="dark" />
    { togglecartbar && <Cartbar /> }
 
    <BrowserRouter>

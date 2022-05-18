@@ -20,13 +20,13 @@ export const cartSlice = createSlice({
 console.log("action---->", action.payload);
 
 
-      const { name, quantity, _id, price, total } = action.payload;
+      const { name, quantity, _id, price, total,image } = action.payload;
       const newCart = [...state.cart];
       const productIndex = newCart.findIndex(
         (product) => product._id === _id
       );
       if (productIndex === -1) {
-        newCart.push({ name, quantity, _id, price, total });
+        newCart.push({ name, quantity, _id, price, total,image });
       } else {
         newCart[productIndex].quantity += quantity;
       }
