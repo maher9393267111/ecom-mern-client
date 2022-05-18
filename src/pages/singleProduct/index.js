@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { showsinglecartinfo,addTo_cart,openfromaddcart } from "../../redux/cart";
 import { motion } from "framer-motion";
 import {toast } from 'react-toastify';
+import {BsFillArrowRightSquareFill,BsFillArrowLeftSquareFill} from 'react-icons/bs';
 import {
   BsFillArrowRightCircleFill,
   BsFillArrowLeftCircleFill,
@@ -133,7 +134,7 @@ const addToCart = (product) => {
   
     //dispatch(addTo_cart(product._id))
   
-  
+  console.log("quantity select from component", initquantity);
     
    const newproduct = Object.assign({},{name:product.name},{_id:product._id} ,{image:product.images[0].secure_url},{price:product.price},{quantity:initquantity});
    console.log("newproduct---->", newproduct);
@@ -149,6 +150,30 @@ const addToCart = (product) => {
   
 
 
+  // increase quantity when product not exist in cart and her update quantity before send to redux cart
+
+
+  const increaseQuantityhere = (_id) => {
+
+setInitquantity((prev) => prev + 1);
+
+
+
+  }
+
+
+  const decreseQuantityhere = (_id) => {
+
+    setInitquantity((prev) => prev - 1);
+
+    if (initquantity === 1) {
+      setInitquantity(1);
+    }
+    
+    
+    
+      }
+    
 
 
 
@@ -361,14 +386,17 @@ const addToCart = (product) => {
 { findproductfromcart ?   <div
     onClick={() => { decreaseQuantityfunc(product._id) } }
     >
-decrease exist item
-    </div>  : <div> decrease add tocart </div> 
+ <BsFillArrowLeftSquareFill className=" text-[29px] "/>
+    </div>  : <div
+    
+    onClick={decreseQuantityhere}
+    >  <BsFillArrowLeftSquareFill className=" text-[29px] "/> </div> 
 
 }
 
 
 <div>
-{ findproductfromcart ? findproductfromcart?.quantity : 0 }
+{ findproductfromcart ? findproductfromcart?.quantity : (<div>{initquantity}</div>) }
  
 
 
@@ -380,8 +408,11 @@ decrease exist item
 { findproductfromcart ?   <div
     onClick={() => { increaseQuantityfunc(product._id) } }
     >
-decrease exist item
-    </div>  : <div> increse add tocart </div> 
+ <BsFillArrowRightSquareFill className=" text-[29px] "/>
+    </div>  : <div
+     onClick={increaseQuantityhere}
+    
+    >   <BsFillArrowRightSquareFill   className=" text-[29px] "/> </div> 
 
 }
 
