@@ -5,6 +5,7 @@ export const productSlice = createSlice({
   name: "product",
   initialState: {
     allproducts: [],
+    productsfromlocal: (JSON.parse(localStorage.getItem('products'))),
     filteredproducts: [],
     toggle: false,
     Show: false,
@@ -18,12 +19,38 @@ export const productSlice = createSlice({
     filtered: false,
     filterebyText: '',
     condition: '',
+    executeappagain: '',
   },
 
   reducers: {
     fetch_products: (state, action) => {
       state.allproducts = action.payload;
     },
+
+    // execute app again in single product page
+
+    eexuteeffectagain: (state, action) => {
+console.log("execute again from redux---->");
+
+state.executeappagain =+ 1;
+
+
+
+
+    },
+
+
+// prouctsfrom local storage
+
+    productsfromlocalFunction: (state, action) => {
+
+      state.productsfromlocal = action.payload;
+
+      console.log("productsfromlocal---->", state.productsfromlocal);
+
+
+    },
+
 
 
     handle_condition: (state, action) => {
@@ -476,6 +503,8 @@ productsColors,
   products_totalprice,
   handlePageChange,
   handle_condition,
+  eexuteeffectagain,
+  productsfromlocalFunction
 } = productSlice.actions;
 
 

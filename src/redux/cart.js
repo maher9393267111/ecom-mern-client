@@ -5,7 +5,7 @@ export const cartSlice = createSlice({
   initialState: {
     //cart : [{name:'',quantity:0,_id:'',price:0 ,total:0}],
     cart: [],
-    cartlocal:[],
+    cartlocal: [],
     open: false,
     togglecartbar: false,
     //quantity : 0,

@@ -9,7 +9,7 @@ import {useState, useEffect} from 'react';
 import axios from 'axios';
 import {useDispatch, useSelector} from 'react-redux';
 import { fetch_categories } from './redux/category';
-import { fetch_products,productsColors } from './redux/product';
+import { fetch_products,productsColors,   productsfromlocalFunction } from './redux/product';
 import Home from './pages/home/index';
 import Category from './pages/category/index';
 import Product from './pages/product';
@@ -30,9 +30,15 @@ function App() {
 
 
   useEffect(() => {
+
+    'useeffect is called when component is mounted'
     const fetchCategories = async () => {
       const res = await axios.get('http://localhost:5000/api/category/get-all-category');
       dispatch(fetch_categories(res.data));
+      localStorage.setItem('categories', JSON.stringify(res.data));
+      
+      //save local storage in redux
+
 
     }
 
@@ -40,7 +46,12 @@ function App() {
 
     const fetchProducts = async () => {
       const res = await axios.get('http://localhost:5000/api/product/all-products');
+
+      // save local storage in redux
+      localStorage.setItem('products', JSON.stringify(res.data));
+
 dispatch(fetch_products(res.data));
+//dispatch(productsfromlocalFunction(JSON.parse(localStorage.getItem('products'))));
 
     }
 
@@ -85,7 +96,7 @@ setTimeout(() => {
 {/* //:id is used to get the id of product */}
 
 
-<Route path ='/product/:id' element = {<SingleProduct />} />
+<Route path ='product/:id' element = {<SingleProduct />} />
         {/* </Route> */}
        
         
